@@ -14,4 +14,10 @@ class GoFishServer
   def stop
     server.close if server
   end
+
+  def accept_connection
+    # accept_nonblock
+    # store accepted client
+    # handle exception with rescue
+  end
 end
