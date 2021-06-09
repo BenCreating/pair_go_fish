@@ -9,10 +9,14 @@ class GoFishServer
 
   def start
     @server = TCPServer.new(port_number)
+    puts "Server started - port: #{port_number}"
   end
 
   def stop
-    server.close if server
+    if server
+      puts 'Server stopped'
+      server.close
+    end
   end
 
   def accept_connection
