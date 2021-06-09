@@ -31,4 +31,15 @@ describe 'GoFishClient' do
       expect(client.read_message).to eq 'No message'
     end
   end
+
+  context '#send_message' do
+    it 'sends a message to the server' do
+      client = GoFishClient.new
+      clients << client
+      server.accept_connection
+      message = 'Hi'
+      client.send_message(message)
+      expect(server.recieve_message(server.clients[0])).to eq message
+    end
+  end
 end
