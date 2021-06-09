@@ -30,4 +30,12 @@ class GoFishServer
   rescue IO::WaitReadable
     'No client to accept'
   end
+
+  def recieve_message(client)
+    sleep(0.1)
+    message = client.read_nonblock(1000).chomp
+    message
+  rescue IO::WaitReadable
+    'No message'
+  end
 end

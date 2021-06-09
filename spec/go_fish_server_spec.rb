@@ -29,4 +29,22 @@ describe 'GoFishServer' do
       expect(server.accept_connection).to eq 'No client to accept'
     end
   end
+
+  context '#recieve_message' do
+    it 'reads a message from a socket' do
+      client = GoFishClient.new
+      server.accept_connection
+      message = 'Hello'
+      client.socket.puts message
+      expect(server.recieve_message(server.clients[0])).to eq message
+      client.close
+    end
+
+    it 'rescues the exception if there is no message' do
+      client = GoFishClient.new
+      server.accept_connection
+      expect(server.recieve_message(server.clients[0])).to eq 'No message'
+      client.close
+    end
+  end
 end
