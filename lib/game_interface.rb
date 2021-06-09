@@ -8,8 +8,10 @@ class GameInterface
   end
 
   def associate_clients_with_players(clients)
-    client_players = {}
-    clients.each { |client| client_players[client] = Player.new}
+    client_players = []
+    clients.each do |client|
+      client_players << {client: client, player: Player.new}
+    end
     client_players
   end
 end
