@@ -10,6 +10,14 @@ describe 'GameInterface' do
     end
   end
 
-  # client/player Hash
-  # game
+  context '#associate_clients_with_players' do
+    it 'returns a hash of players, using clients as keys' do
+      client1 = 'client1'
+      client2 = 'client2'
+      interface = GameInterface.new([])
+      clients_to_players = interface.associate_clients_with_players([client1, client2])
+      expect(clients_to_players[client1]).to_not be nil
+      expect(clients_to_players[client2]).to_not be nil
+    end
+  end
 end
