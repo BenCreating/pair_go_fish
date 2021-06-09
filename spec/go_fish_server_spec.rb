@@ -1,5 +1,4 @@
 require_relative '../lib/go_fish_server.rb'
-require_relative '../lib/go_fish_client.rb'
 
 describe 'GoFishServer' do
   let(:server) { GoFishServer.new }
@@ -18,7 +17,7 @@ describe 'GoFishServer' do
 
   context '#accept_connection' do
     it 'accepts a client' do
-      client = GoFishClient.new
+      client = TCPSocket.new('localhost', server.port_number)
       server.accept_connection
       expect(server.clients.count).to eq 1
       client.close
@@ -32,16 +31,16 @@ describe 'GoFishServer' do
 
   context '#recieve_message' do
     it 'reads a message from a socket' do
-      client = GoFishClient.new
+      client = TCPSocket.new('localhost', server.port_number)
       server.accept_connection
       message = 'Hello'
-      client.socket.puts message
+      client.puts message
       expect(server.recieve_message(server.clients[0])).to eq message
       client.close
     end
 
     it 'rescues the exception if there is no message' do
-      client = GoFishClient.new
+      client = TCPSocket.new('localhost', server.port_number)
       server.accept_connection
       expect(server.recieve_message(server.clients[0])).to eq 'No message'
       client.close
