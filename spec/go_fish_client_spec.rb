@@ -1,16 +1,11 @@
 require_relative '../lib/go_fish_client'
-require_relative '../lib/go_fish_server'
 
 describe 'GoFishClient' do
-  let(:server) { GoFishServer.new }
+  let!(:server) { TCPServer.new(3336) }
   let!(:clients) { [] }
 
-  before(:each) do
-    server.start
-  end
-
   after(:each) do
-    server.stop
+    server.close
     clients.each { |client| client.close }
   end
 
@@ -18,16 +13,16 @@ describe 'GoFishClient' do
     it 'reads a message from the server' do
       client = GoFishClient.new
       clients << client
-      server.accept_connection
+      socket = server.accept
       message = 'Hi'
-      server.send_message(server.clients[0], message)
+      socket.puts message
       expect(client.recieve_message).to eq message
     end
 
     it 'rescues the exception when there is no message' do
       client = GoFishClient.new
       clients << client
-      server.accept_connection
+      server.accept
       expect(client.recieve_message).to eq 'No message'
     end
   end
@@ -36,10 +31,10 @@ describe 'GoFishClient' do
     it 'sends a message to the server' do
       client = GoFishClient.new
       clients << client
-      server.accept_connection
+      socket = server.accept
       message = 'Hi'
       client.send_message(message)
-      expect(server.recieve_message(server.clients[0])).to eq message
+      expect(socket.gets.chomp).to eq message
     end
   end
 end
