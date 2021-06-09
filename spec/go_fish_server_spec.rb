@@ -1,4 +1,5 @@
 require_relative '../lib/go_fish_server.rb'
+require_relative '../lib/go_fish_client.rb'
 
 describe 'GoFishServer' do
   let(:server) { GoFishServer.new }
@@ -15,7 +16,15 @@ describe 'GoFishServer' do
     expect(server.port_number).to eq 3336
   end
 
-  it 'accepts a client' do
-    expect(server.accept_connection).to eq 'accepted'
+  context '#accept_connection' do
+    it 'accepts a client' do
+      cient = GoFishClient.new
+      server.accept_connection
+      expect(server.clients.count).to eq 1
+    end
+
+    it 'rescue no client error' do
+      expect(server.accept_connection).to eq 'No client to accept'
+    end
   end
 end

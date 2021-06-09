@@ -1,10 +1,14 @@
 require 'socket'
 
 class GoFishServer
-  attr_reader :server
+  attr_reader :server, :clients
 
   def port_number
     3336
+  end
+
+  def initialize
+    @clients = []
   end
 
   def start
@@ -20,8 +24,9 @@ class GoFishServer
   end
 
   def accept_connection
-    # accept_nonblock
-    # store accepted client
-    # handle exception with rescue
+    client = server.accept_nonblock
+    clients << client
+  rescue IO::EAGAINWaitReadable
+    'No client to accept'
   end
 end
