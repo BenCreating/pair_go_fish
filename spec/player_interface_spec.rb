@@ -2,9 +2,9 @@ require_relative '../lib/player_interface'
 
 describe 'PlayerInterface' do
   context '#initialize' do
-    it 'stores a player and client' do
-      interface = PlayerInterface.new('player', 'client')
-      expect(interface.player).to eq 'player'
+    it 'stores a client and creates a player for them' do
+      interface = PlayerInterface.new('client')
+      expect(interface.player).to_not be_nil
       expect(interface.client).to eq 'client'
     end
   end
@@ -20,7 +20,7 @@ describe 'PlayerInterface' do
 
     it 'sends a message to the client' do
       client = server.accept
-      interface = PlayerInterface.new('player', client)
+      interface = PlayerInterface.new(client)
       message = 'Hello'
       interface.message_client(message)
       expect(user_socket.gets.chomp).to eq message
