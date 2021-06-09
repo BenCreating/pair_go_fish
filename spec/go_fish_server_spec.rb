@@ -47,4 +47,15 @@ describe 'GoFishServer' do
       client.close
     end
   end
+
+  context '#send_message' do
+    it 'sends a message to a client' do
+      client = TCPSocket.new('localhost', server.port_number)
+      server.accept_connection
+      message = 'Hello'
+      server.send_message(server.clients[0], message)
+      expect(client.gets.chomp).to eq message
+      client.close
+    end
+  end
 end

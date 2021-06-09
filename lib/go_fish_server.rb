@@ -38,4 +38,8 @@ class GoFishServer
   rescue IO::WaitReadable
     'No message'
   end
+
+  def send_message(client, message)
+    client.puts message
+  end
 end
