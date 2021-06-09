@@ -61,5 +61,14 @@ describe 'GameInterface' do
       interface.describe_result_to_clients(result)
       expect(clients_and_sockets[0][:client].gets.chomp).to eq result.private_description
     end
+
+    it 'sends the public result description to all players who did not take the turn' do
+      clients_and_sockets = create_client_and_socket_array(3)
+      interface = GameInterface.new([clients_and_sockets[0][:socket], clients_and_sockets[1][:socket], clients_and_sockets[2][:socket]])
+      result = TurnResult.new(interface.clients_to_players[0][:player])
+      interface.describe_result_to_clients(result)
+      expect(clients_and_sockets[1][:client].gets.chomp).to eq result.public_description
+      expect(clients_and_sockets[2][:client].gets.chomp).to eq result.public_description
+    end
   end
 end
