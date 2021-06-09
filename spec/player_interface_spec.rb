@@ -9,7 +9,7 @@ describe 'PlayerInterface' do
     end
   end
 
-  context 'message_client' do
+  context '#send_message_to_client' do
     let!(:server) { TCPServer.new(3336) }
     let!(:user_socket) { TCPSocket.new('localhost', 3336) }
 
@@ -22,7 +22,7 @@ describe 'PlayerInterface' do
       client = server.accept
       interface = PlayerInterface.new(client)
       message = 'Hello'
-      interface.message_client(message)
+      interface.send_message_to_client(message)
       expect(user_socket.gets.chomp).to eq message
     end
   end

@@ -8,7 +8,7 @@ class PlayerInterface
     @player = Player.new(name)
   end
 
-  def message_client(message)
+  def send_message_to_client(message)
     client.puts message
   end
 end
