@@ -18,9 +18,11 @@ describe 'GoFishServer' do
 
   context '#accept_connection' do
     it 'accepts a client' do
-      cient = GoFishClient.new
+      client = GoFishClient.new
       server.accept_connection
       expect(server.clients.count).to eq 1
+      client.close
+      # TODO ask how to confirm that the client is actually the one I expect without hanging
     end
 
     it 'rescue no client error' do
