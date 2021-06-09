@@ -14,21 +14,21 @@ describe 'GoFishClient' do
     clients.each { |client| client.close }
   end
 
-  context '#read_message' do
+  context '#recieve_message' do
     it 'reads a message from the server' do
       client = GoFishClient.new
       clients << client
       server.accept_connection
       message = 'Hi'
       server.send_message(server.clients[0], message)
-      expect(client.read_message).to eq message
+      expect(client.recieve_message).to eq message
     end
 
     it 'rescues the exception when there is no message' do
       client = GoFishClient.new
       clients << client
       server.accept_connection
-      expect(client.read_message).to eq 'No message'
+      expect(client.recieve_message).to eq 'No message'
     end
   end
 
