@@ -26,6 +26,7 @@ class GoFishServer
   def accept_connection
     client = server.accept_nonblock
     clients << client
+    puts 'client connected'
   rescue IO::EAGAINWaitReadable
     'No client to accept'
   end
