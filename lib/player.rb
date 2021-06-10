@@ -5,4 +5,8 @@ class Player
     @name = name
     @hand = hand
   end
+
+  def take_card(card)
+    hand.add_card(card)
+  end
 end

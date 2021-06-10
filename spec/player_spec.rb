@@ -20,4 +20,13 @@ describe 'Player' do
       expect(player.hand).to eq hand
     end
   end
+
+  context '#take_card' do
+    it 'adds the specified card to the hand' do
+      card = PlayingCard.new('J')
+      player = Player.new
+      player.take_card(card)
+      expect(player.hand.cards.first).to eq card
+    end
+  end
 end
