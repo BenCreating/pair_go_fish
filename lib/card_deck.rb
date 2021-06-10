@@ -14,6 +14,10 @@ class CardDeck
     cards.unshift(card)
   end
 
+  def deal
+    cards.pop
+  end
+
   private
   def default_cards
     cards = []

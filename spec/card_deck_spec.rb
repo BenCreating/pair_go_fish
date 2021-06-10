@@ -21,4 +21,11 @@ describe 'CardDeck' do
     expect(deck.cards.count).to eq 3
     expect(deck.cards.first).to eq new_card
   end
+
+  it 'deals a card from the top of the deck' do
+    cards = [PlayingCard.new('3'), PlayingCard.new('2'), PlayingCard.new('A')]
+    deck = CardDeck.new(cards)
+    dealt_card = deck.deal
+    expect(dealt_card.rank).to eq 'A'
+  end
 end
