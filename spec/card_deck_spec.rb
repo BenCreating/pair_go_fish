@@ -21,15 +21,4 @@ describe 'CardDeck' do
     expect(deck.cards.count).to eq 3
     expect(deck.cards.first).to eq new_card
   end
-
-  # generic:
-  # add card
-
-  # hand:
-  # detect and remove books
-  # give cards away by rank
-
-  # middle deck:
-  # deal the top card
-  # shuffle
 end
