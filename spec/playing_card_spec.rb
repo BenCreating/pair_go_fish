@@ -6,4 +6,9 @@ describe 'PlayingCard' do
     card = PlayingCard.new(rank)
     expect(card.rank).to eq rank
   end
+
+  it 'reverts to a default rank if none is specified' do
+    card = PlayingCard.new
+    expect(card.rank).to_not be_nil
+  end
 end
