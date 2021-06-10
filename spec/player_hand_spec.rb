@@ -1,5 +1,6 @@
 require_relative '../lib/player_hand'
 require_relative '../lib/playing_card'
+require_relative '../lib/go_fish_game'
 
 describe 'PlayerHand' do
   context '#give_cards_by_rank' do
@@ -12,4 +13,19 @@ describe 'PlayerHand' do
       expect(hand.cards).to match_array non_matching_cards
     end
   end
+
+  context '#find_and_remove_set' do
+    it 'removes a card set from the hand returns the rank of the set' do
+      set_cards = [PlayingCard.new('3'), PlayingCard.new('3'), PlayingCard.new('3'), PlayingCard.new('3')]
+      non_set_cards = [PlayingCard.new('K'), PlayingCard.new('4')]
+      hand = PlayerHand.new(non_set_cards + set_cards)
+      removed_set_rank = hand.find_and_remove_set
+      expect(removed_set_rank).to eq '3'
+      expect(hand.cards).to match_array non_set_cards
+    end
+  end
+
+  # hand:
+  # detect and remove books
+  # give cards away by rank
 end
