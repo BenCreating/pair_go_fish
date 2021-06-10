@@ -7,8 +7,19 @@ describe 'CardDeck' do
     deck = CardDeck.new(cards)
     expect(deck.cards).to match_array cards
   end
+
+  it 'defaults to a standard 52 card deck' do
+    deck = CardDeck.new
+    expect(deck.cards.count).to eq 52
+  end
+
+  # it 'can add a card to the deck' do
+  #   cards = [PlayingCard.new, PlayingCard.new]
+  #   deck = CardDeck.new(cards)
+  #   expect(deck.cards).to match_array cards
+  # end
+
   # generic:
-  # store cards
   # add card
 
   # hand:
