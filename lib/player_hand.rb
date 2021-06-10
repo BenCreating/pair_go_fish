@@ -20,6 +20,12 @@ class PlayerHand < CardDeck
       end
     end
     removed_set
+
+  def ranks_in_hand
+    rank_list = []
+    cards.each { |card| rank_list << card.rank }
+    rank_list.uniq!
+    rank_list
   end
 
   private

@@ -25,6 +25,15 @@ describe 'PlayerHand' do
     end
   end
 
+  context '#ranks_in_hand' do
+    it 'returns an array of all the ranks in the hand' do
+      cards = [PlayingCard.new('3'), PlayingCard.new('3'), PlayingCard.new('5'), PlayingCard.new('A')]
+      hand = PlayerHand.new(cards)
+      found_ranks = hand.ranks_in_hand
+      expect(found_ranks).to match_array ['3', '5', 'A']
+    end
+  end
+
   # hand:
   # detect and remove books
   # give cards away by rank
