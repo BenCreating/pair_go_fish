@@ -9,17 +9,14 @@ class PlayerHand < CardDeck
   end
 
   def find_and_remove_set
-    removed_set = nil
-    rank_list = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
-    rank_list.each do |rank|
-      found_cards = find_cards_by_rank(rank)
-      if found_cards.count >= GoFishGame::CARDS_NEEDED_FOR_A_SET
+    ranks_in_hand.each do |rank|
+      if find_cards_by_rank(rank).count >= GoFishGame::CARDS_NEEDED_FOR_A_SET
         remove_cards_by_rank(rank)
-        removed_set = rank
-        break
+        return rank
       end
     end
-    removed_set
+    nil
+  end
 
   def ranks_in_hand
     rank_list = []
