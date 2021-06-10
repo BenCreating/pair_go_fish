@@ -3,7 +3,7 @@ require_relative '../lib/player_hand'
 require_relative '../lib/playing_card'
 
 describe 'Player' do
-  context 'initialize' do
+  context '#initialize' do
     it 'initializes a player with a name' do
       player = Player.new('Joe')
       expect(player.name).to eq 'Joe'
