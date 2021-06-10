@@ -23,6 +23,14 @@ describe 'PlayerHand' do
       expect(removed_set_rank).to eq '3'
       expect(hand.cards).to match_array non_set_cards
     end
+
+    it 'returns nil for the removed set and does not edit the hand when no set is removed' do
+      cards = [PlayingCard.new('K'), PlayingCard.new('4'), PlayingCard.new('3'), PlayingCard.new('3'), PlayingCard.new('3')]
+      hand = PlayerHand.new(cards)
+      removed_set_rank = hand.find_and_remove_set
+      expect(removed_set_rank).to be_nil
+      expect(hand.cards).to match_array cards
+    end
   end
 
   context '#ranks_in_hand' do
