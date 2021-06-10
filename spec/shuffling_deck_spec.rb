@@ -14,7 +14,7 @@ describe 'ShufflingDeck' do
   def compare_cards(card1, card2)
   end
 
-  it 'should shuffle the order of the cards' do
+  it 'shuffles the order of the cards' do
     unshuffled_deck = ShufflingDeck.new
     deck = ShufflingDeck.new
     deck.shuffle

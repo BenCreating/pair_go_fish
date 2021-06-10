@@ -2,7 +2,7 @@ require_relative '../lib/card_deck'
 require_relative '../lib/playing_card'
 
 describe 'CardDeck' do
-  it 'stores an array of cards' do
+  it 'stores a specified array of cards' do
     cards = [PlayingCard.new, PlayingCard.new]
     deck = CardDeck.new(cards)
     expect(deck.cards).to match_array cards
@@ -13,7 +13,7 @@ describe 'CardDeck' do
     expect(deck.cards.count).to eq 52
   end
 
-  it 'can add a card to the deck' do
+  it 'adds a card to the deck' do
     cards = [PlayingCard.new, PlayingCard.new]
     new_card = PlayingCard.new('8')
     deck = CardDeck.new(cards)

@@ -4,7 +4,7 @@ require_relative '../lib/turn_result'
 
 describe 'GameInterface' do
   context '#initialize' do
-    it 'takes client array as input and creates a player interface for each' do
+    it 'takes an array of clients as input and creates a player interface for each' do
       client1 = 'client1'
       client2 = 'client2'
       interface = GameInterface.new([client1, client2])
