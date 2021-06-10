@@ -19,6 +19,6 @@ describe 'ShufflingDeck' do
     deck = ShufflingDeck.new
     deck.shuffle
     deck_in_new_order = check_in_new_order(deck, unshuffled_deck)
-    expect(deck_in_new_order).to be true
+    expect(deck_in_new_order).to be(true), 'in extremely rare cases, the deck may shuffle back into the order it started with'
   end
 end
