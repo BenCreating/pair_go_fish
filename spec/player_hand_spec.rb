@@ -32,6 +32,12 @@ describe 'PlayerHand' do
       found_ranks = hand.ranks_in_hand
       expect(found_ranks).to match_array ['3', '5', 'A']
     end
+
+    it 'returns an empty array when the hand is empty' do
+      hand = PlayerHand.new([])
+      found_ranks = hand.ranks_in_hand
+      expect(found_ranks).to eq []
+    end
   end
 
   # hand:
