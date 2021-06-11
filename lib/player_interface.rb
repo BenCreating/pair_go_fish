@@ -22,7 +22,7 @@ class PlayerInterface
     interpret_question_response(question, response, other_players)
   end
 
-  def ask_client_a_question_and_wait_for_response
+  def ask_client_a_question_and_wait_for_response(question, other_players)
     send_message_to_client(expand_question(question, other_players))
     response = nil
     while response == nil do
