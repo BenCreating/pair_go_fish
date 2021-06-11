@@ -43,7 +43,7 @@ describe 'GoFishGame' do
   end
 
   context '#increment_turn_index' do
-    it 'increases the turn index by' do
+    it 'increases the turn index by 1' do
       game.increment_turn_index
       expect(game.turn_index).to eq 1
     end
