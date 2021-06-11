@@ -13,8 +13,12 @@ class PlayerInterface
   end
 
   def pass_question_to_player(question)
-
     send_message_to_client(expand_question(question))
+    response = nil
+    while response == nil do
+      response = read_message_from_client
+    end
+    response
   end
 
   def expand_question(question)
