@@ -10,7 +10,7 @@ class MockPlayerInterface
     @client = client
   end
 
-  def pass_question_to_player(question)
+  def ask_client_a_question_and_wait_for_response(question)
     'A'
   end
 end
