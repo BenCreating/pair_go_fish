@@ -1,8 +1,9 @@
 class TurnResult
-  attr_reader :turn_player
-  
-  def initialize(turn_player)
+  attr_reader :turn_player, :asked_player
+
+  def initialize(turn_player, asked_player)
     @turn_player = turn_player
+    @asked_player = asked_player
   end
 
   def public_description
