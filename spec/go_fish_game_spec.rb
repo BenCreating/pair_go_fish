@@ -34,6 +34,19 @@ describe 'GoFishGame' do
     end
   end
 
+
+  context '#increment_turn_index' do
+    it 'increases the turn index by' do
+      game.increment_turn_index
+      expect(game.turn_index).to eq 1
+    end
+
+    it 'wraps the turn index back to 0 when it reaches the last player' do
+      players.count.times { game.increment_turn_index }
+      expect(game.turn_index).to eq 0
+    end
+  end
+
   context '#pass_question_to_player' do
     let(:game) { GoFishGame.new(players: players, interface: interface) }
 

@@ -2,6 +2,7 @@ require 'shuffling_deck'
 
 class GoFishGame
   attr_reader :players, :deck, :interface
+  attr_accessor :turn_index
 
   CARDS_NEEDED_FOR_A_SET = 4
   STARTING_CARD_COUNT = 5
@@ -10,6 +11,7 @@ class GoFishGame
     @players = players
     @deck = deck
     @interface = interface
+    @turn_index = 0
   end
 
   def deal_starting_cards
@@ -19,6 +21,11 @@ class GoFishGame
         player.take_card(card)
       end
     end
+  end
+
+
+  def increment_turn_index
+    self.turn_index = (turn_index + 1) % players.count
   end
 
   def pass_question_to_player(player, question)
