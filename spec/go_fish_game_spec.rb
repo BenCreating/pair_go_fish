@@ -34,6 +34,13 @@ describe 'GoFishGame' do
     end
   end
 
+  context '#fish_for_card' do
+    it 'returns the top card of the deck' do
+      expected_card = game.deck.cards[-1]
+      fished_card = game.fish_for_card
+      expect(fished_card). to eq expected_card
+    end
+  end
 
   context '#increment_turn_index' do
     it 'increases the turn index by' do
