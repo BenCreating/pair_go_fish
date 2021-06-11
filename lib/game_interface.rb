@@ -6,10 +6,12 @@ require 'pry'
 class GameInterface
   attr_reader :player_interfaces
 
-  def initialize(clients)
+  def initialize(clients, interface_overrides = nil)
     @player_interfaces = []
-    clients.each do |client|
-      player_interfaces << PlayerInterface.new(client)
+    if !interface_overrides
+      clients.each { |client| player_interfaces << PlayerInterface.new(client) }
+    else
+      clients.each.with_index { |client, index| player_interfaces << interface_overrides[index] }
     end
   end
 
@@ -21,5 +23,10 @@ class GameInterface
         interface.send_message_to_client(result.public_description)
       end
     end
+  end
+
+  def pass_question_to_player(player, question)
+    target_player_interface = (player_interfaces.select { |interface| interface.player == player }).pop
+    target_player_interface.pass_question_to_player(question)
   end
 end

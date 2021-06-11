@@ -2,6 +2,19 @@ require_relative '../lib/game_interface'
 require_relative '../lib/player_interface'
 require_relative '../lib/turn_result'
 
+class MockPlayerInterface
+  attr_reader :player, :client
+
+  def initialize(client)
+    @player = 'Player'
+    @client = client
+  end
+
+  def pass_question_to_player(question)
+    'A'
+  end
+end
+
 describe 'GameInterface' do
   context '#initialize' do
     it 'takes an array of clients as input and creates a player interface for each' do
@@ -58,6 +71,15 @@ describe 'GameInterface' do
       interface.describe_result_to_clients(result)
       expect(clients_and_sockets[1][:client].gets.chomp).to eq result.public_description
       expect(clients_and_sockets[2][:client].gets.chomp).to eq result.public_description
+    end
+  end
+
+  context '#pass_question_to_player' do
+    let(:game_interface) { GameInterface.new(['client1'], [MockPlayerInterface.new('client1')]) }
+    it 'passes a request to the player interface for the player to select a card to ask about' do
+      player = game_interface.player_interfaces[0].player
+      chosen_card = game_interface.pass_question_to_player(player, 'pick card')
+      expect(chosen_card).to eq 'A'
     end
   end
 end
