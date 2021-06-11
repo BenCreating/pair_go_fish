@@ -62,10 +62,10 @@ describe 'PlayerInterface' do
   end
 
   context '#expand_question' do
-    let(:interface) { interface = PlayerInterface.new('client') }
-    let(:hand1) { hand1 = PlayerHand.new([PlayingCard.new('3'), PlayingCard.new('5')]) }
-    let(:hand2) { hand2 = PlayerHand.new([PlayingCard.new('J')]) }
-    let(:players) { players = [Player.new('Thor', hand1), Player.new('Loki', hand2), Player.new('Odin')] }
+    let(:interface) { PlayerInterface.new('client') }
+    let(:hand1) { PlayerHand.new([PlayingCard.new('3'), PlayingCard.new('5')]) }
+    let(:hand2) { PlayerHand.new([PlayingCard.new('J')]) }
+    let(:players) { [Player.new('Thor', hand1), Player.new('Loki', hand2), Player.new('Odin')] }
 
     it 'expands "pick card" into a full question with a list of cards' do
       interface.player.take_card(PlayingCard.new('Q'))
