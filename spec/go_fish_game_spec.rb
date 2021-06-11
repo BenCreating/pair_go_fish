@@ -6,9 +6,9 @@ require_relative '../lib/playing_card'
 class MockGameInterface
   def pass_question_to_player(player, other_players, question)
     if question == 'pick card'
-      'A'
+      player.hand.cards[0]
     elsif question == 'pick player'
-      other_players
+      other_players[0]
     end
   end
 end
@@ -77,12 +77,12 @@ describe 'GoFishGame' do
 
     it 'passes a request to the game interface for the player to select a card to ask about' do
       chosen_card = game.pass_question_to_player(players[0], 'pick card')
-      expect(chosen_card).to eq 'A'
+      expect(chosen_card).to eq players[0].hand.cards[0]
     end
 
     it 'passes a request to the player interface for the player to select who they want to talk to' do
-      chosen_card = game.pass_question_to_player(players[0], 'pick player')
-      expect(chosen_card).to match_array [players[1], players[2]]
+      chosen_player = game.pass_question_to_player(players[0], 'pick player')
+      expect(chosen_player).to eq players[1]
     end
   end
 end
