@@ -14,12 +14,24 @@ class PlayerInterface
   end
 
   def ask_a_question_and_wait_for_response(question, other_players)
+    if is_ai == false
+      response = ask_client_a_question_and_wait_for_response(question, other_players)
+    else
+      response = ask_ai_a_question_and_return_response(question, other_players)
+    end
+  end
+
+  def ask_client_a_question_and_wait_for_response
     send_message_to_client(expand_question(question, other_players))
     response = nil
     while response == nil do
       response = read_message_from_client
     end
     response
+  end
+
+  def ask_ai_a_question_and_return_response(question, other_players)
+    return 0
   end
 
   def read_message_from_client
