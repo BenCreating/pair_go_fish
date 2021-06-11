@@ -1,6 +1,7 @@
 require_relative '../lib/game_interface'
 require_relative '../lib/player_interface'
 require_relative '../lib/turn_result'
+require_relative '../lib/playing_card'
 
 class MockPlayerInterface
   attr_reader :player, :client
@@ -65,7 +66,7 @@ describe 'GameInterface' do
         interface = GameInterface.new([clients_and_sockets[0][:socket], clients_and_sockets[1][:socket], clients_and_sockets[2][:socket]])
         turn_player = interface.player_interfaces[0].player
         asked_player = interface.player_interfaces[1].player
-        result = TurnResult.new(turn_player, asked_player)
+        result = TurnResult.new(turn_player, asked_player, asked_card: PlayingCard.new)
         interface.describe_result_to_clients(result)
         expect(clients_and_sockets[0][:client].gets.chomp).to eq result.private_description
       end
@@ -74,7 +75,7 @@ describe 'GameInterface' do
         interface = GameInterface.new([clients_and_sockets[0][:socket], clients_and_sockets[1][:socket], clients_and_sockets[2][:socket]])
         turn_player = interface.player_interfaces[0].player
         asked_player = interface.player_interfaces[1].player
-        result = TurnResult.new(turn_player, asked_player)
+        result = TurnResult.new(turn_player, asked_player,  asked_card: PlayingCard.new)
         interface.describe_result_to_clients(result)
         expect(clients_and_sockets[1][:client].gets.chomp).to eq result.public_description
         expect(clients_and_sockets[2][:client].gets.chomp).to eq result.public_description

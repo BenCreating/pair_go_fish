@@ -21,7 +21,7 @@ class Turn
     taken_cards = asked_player.give_cards_by_rank(asked_card.rank)
     taken_cards = [fish_for_card] if taken_cards.empty?
     taken_cards.each { |card| turn_player.take_card(card) }
-    TurnResult.new(turn_player, asked_player)
+    TurnResult.new(turn_player, asked_player, asked_card: asked_card, taken_cards: taken_cards)
   end
 
   private
