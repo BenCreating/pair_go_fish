@@ -62,6 +62,14 @@ describe 'GoFishGame' do
       empty_deck_game.increment_turn_index
       expect(empty_deck_game.turn_index).to eq 2
     end
+
+    it 'does not skip player 2 when they have no cards, but the deck has cards' do
+      player_take_cards(players[0], [PlayingCard.new('5'), PlayingCard.new('4')])
+      player_take_cards(players[2], [PlayingCard.new('7')])
+      full_deck_game = GoFishGame.new(players: players, interface: interface, deck: ShufflingDeck.new())
+      full_deck_game.increment_turn_index
+      expect(full_deck_game.turn_index).to eq 1
+    end
   end
 
   context '#pass_question_to_player' do
