@@ -10,7 +10,7 @@ class MockPlayerInterface
     @client = client
   end
 
-  def ask_client_a_question_and_wait_for_response(question, all_players)
+  def ask_a_question_and_wait_for_response(question, all_players)
     if question == 'pick card'
       'A'
     elsif question == 'pick player'
