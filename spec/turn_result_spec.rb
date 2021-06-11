@@ -25,4 +25,11 @@ describe 'TurnResult' do
       expect(description).to eq 'You ask Margaret for a 5. Margaret has 0. You go fishing and catch a 7.'
     end
   end
+
+  context '#took_cards?' do
+    it 'returns true when the player took cards' do
+      turn_result = TurnResult.new(player_1, player_2, taken_cards: [PlayingCard.new('A')])
+      expect(turn_result.took_cards?).to eq true
+    end
+  end
 end
