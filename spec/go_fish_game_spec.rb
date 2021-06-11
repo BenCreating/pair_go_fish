@@ -18,6 +18,12 @@ describe 'GoFishGame' do
   let(:interface) { MockGameInterface.new }
   let(:game) { game = GoFishGame.new(players: players, interface: interface) }
 
+  def player_take_cards(player, cards)
+    cards.each do |card|
+      player.take_card(card)
+    end
+  end
+
   context '#initialize' do
     it 'stores the players' do
       expect(game.players).to match_array players
