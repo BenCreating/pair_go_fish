@@ -53,25 +53,33 @@ describe 'Turn' do
   context '#play' do
     let(:player_1_cards) { [PlayingCard.new('5'), PlayingCard.new('A')] }
     let(:player_2_cards) { [PlayingCard.new('A')] }
+    let(:no_match_cards) { [PlayingCard.new('2'), PlayingCard.new('3')] }
     let(:player1) { Player.new('Player 1') }
     let(:player2) { Player.new('Player 2') }
     let(:players) { [player1, player2] }
     let(:game) { MockGoFishGame.new(players) }
 
-    before(:each) do
-      player_1_cards.each do |card|
-        player1.take_card(card)
-      end
-
-      player_2_cards.each do |card|
-        player2.take_card(card)
+    def player_take_cards(player, cards)
+      cards.each do |card|
+        player.take_card(card)
       end
     end
 
     it 'player 2 asks for, and recieves, a card from player 1' do
+      player_take_cards(player1, player_1_cards)
+      player_take_cards(player2, player_2_cards)
       turn = Turn.new(player2, game)
       turn.play
       expect(player1.hand.cards.count).to eq 1
+      expect(player2.hand.cards.count).to eq 2
+    end
+
+    it 'player 2 asks for, and does not recieve, a card from player 1' do
+      player_take_cards(player1, player_1_cards)
+      player_take_cards(player2, no_match_cards)
+      turn = Turn.new(player2, game)
+      turn.play
+      expect(player1.hand.cards.count).to eq 2
       expect(player2.hand.cards.count).to eq 2
     end
   end
