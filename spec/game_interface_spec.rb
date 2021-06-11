@@ -10,8 +10,12 @@ class MockPlayerInterface
     @client = client
   end
 
-  def ask_client_a_question_and_wait_for_response(question)
-    'A'
+  def ask_client_a_question_and_wait_for_response(question, all_players)
+    if question == 'pick card'
+      'A'
+    elsif question == 'pick player'
+      'player'
+    end
   end
 end
 
@@ -75,11 +79,19 @@ describe 'GameInterface' do
   end
 
   context '#pass_question_to_player' do
-    let(:game_interface) { GameInterface.new(['client1'], [MockPlayerInterface.new('client1')]) }
+    let(:game_interface) { GameInterface.new(['client1', 'client2'], [MockPlayerInterface.new('client1'), MockPlayerInterface.new('client2')]) }
+    let(:players) { [game_interface.player_interfaces[0].player, game_interface.player_interfaces[1].player] }
+
     it 'passes a request to the player interface for the player to select a card to ask about' do
       player = game_interface.player_interfaces[0].player
-      chosen_card = game_interface.pass_question_to_player(player, 'pick card')
+      chosen_card = game_interface.pass_question_to_player(player, players, 'pick card')
       expect(chosen_card).to eq 'A'
+    end
+
+    it 'passes a request to the player interface for the player to select who they want to talk to' do
+      player = game_interface.player_interfaces[0].player
+      chosen_card = game_interface.pass_question_to_player(player, players, 'pick player')
+      expect(chosen_card).to eq 'player'
     end
   end
 end

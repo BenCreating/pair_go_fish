@@ -25,8 +25,8 @@ class GameInterface
     end
   end
 
-  def pass_question_to_player(player, question)
+  def pass_question_to_player(player, all_players, question)
     target_player_interface = (player_interfaces.select { |interface| interface.player == player }).pop
-    target_player_interface.ask_client_a_question_and_wait_for_response(question)
+    target_player_interface.ask_client_a_question_and_wait_for_response(question, all_players)
   end
 end

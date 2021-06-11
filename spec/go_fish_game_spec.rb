@@ -2,7 +2,7 @@ require_relative '../lib/go_fish_game'
 require_relative '../lib/player'
 
 class MockGameInterface
-  def pass_question_to_player(player, question)
+  def pass_question_to_player(player, all_players, question)
     if question == 'pick card'
       'A'
     elsif question == 'pick player'
