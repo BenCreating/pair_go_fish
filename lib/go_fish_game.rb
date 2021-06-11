@@ -22,6 +22,7 @@ class GoFishGame
   end
 
   def pass_question_to_player(player, question)
-    interface.pass_question_to_player(player, players, question)
+    other_players = players.reject { |other_player| other_player == player }
+    interface.pass_question_to_player(player, other_players, question)
   end
 end
