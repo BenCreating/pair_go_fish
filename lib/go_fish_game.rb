@@ -1,4 +1,5 @@
 require 'shuffling_deck'
+require 'turn'
 
 class GoFishGame
   attr_reader :players, :deck, :interface
@@ -23,6 +24,12 @@ class GoFishGame
     end
   end
 
+  def play_next_turn
+    turn = Turn.new(players[turn_index], self)
+    turn_result = turn.play
+    increment_turn_index
+    turn_result
+  end
 
   def increment_turn_index
     self.turn_index = (turn_index + 1) % players.count

@@ -42,6 +42,14 @@ describe 'GoFishGame' do
     end
   end
 
+  context '#play_next_turn' do
+    it 'a player takes a turn and it returns the turn result' do
+      player_take_cards(players[0], [PlayingCard.new('5')])
+      turn_result = game.play_next_turn
+      expect(turn_result).to_not eq nil
+    end
+  end
+
   context '#fish_for_card' do
     it 'returns the top card of the deck' do
       expected_card = game.deck.cards[-1]
