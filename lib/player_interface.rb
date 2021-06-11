@@ -13,8 +13,8 @@ class PlayerInterface
     client.puts message
   end
 
-  def ask_client_a_question_and_wait_for_response(question, all_players)
-    send_message_to_client(expand_question(question, all_players))
+  def ask_client_a_question_and_wait_for_response(question, other_players)
+    send_message_to_client(expand_question(question, other_players))
     response = nil
     while response == nil do
       response = read_message_from_client
