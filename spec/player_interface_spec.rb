@@ -81,7 +81,7 @@ describe 'PlayerInterface' do
   end
 
   context '#interpret_question_response' do
-    let(:interface) { interface = PlayerInterface.new('client') }
+    let(:interface) { interface = PlayerInterface.new }
     let(:cards) { [PlayingCard.new('3'), PlayingCard.new('5')] }
     let(:players) { [Player.new('Thor'), Player.new('Loki'), Player.new('Odin')] }
 

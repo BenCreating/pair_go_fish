@@ -1,5 +1,5 @@
 require_relative 'player'
-require 'pry'
+
 class PlayerInterface
   attr_reader :player, :client, :is_ai
 
@@ -32,14 +32,14 @@ class PlayerInterface
   end
 
   def ask_ai_a_question_and_return_response(question, other_players)
-    return 0
+    return '0'
   end
 
   def interpret_question_response(question, response, other_players)
-    if question == 'pick card'
-      player.hand.cards[response]
-    elsif question == 'pick player'
-      other_players[response]
+    if response.to_i.to_s == response
+      process_response(question, response.to_i, other_players)
+    else
+      ask_a_question_and_wait_for_response(question, other_players)
     end
   end
 
@@ -96,5 +96,13 @@ class PlayerInterface
       ascii_card << row_characters
     end
     ascii_card + "\n"
+  end
+
+  def process_response(question, response, other_players)
+    if question == 'pick card'
+      player.hand.cards[response]
+    elsif question == 'pick player'
+      other_players[response]
+    end
   end
 end
