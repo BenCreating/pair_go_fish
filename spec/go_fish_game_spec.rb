@@ -36,6 +36,14 @@ describe 'GoFishGame' do
     end
   end
 
+  context '#pass_question_to_player' do
+    it 'passes a request to the game interface for the player to select a card to ask about' do
+      game = GoFishGame.new(players: players, interface: interface)
+      chosen_card = game.pass_question_to_player('pick card')
+      expect(chosen_card).to eq 'A'
+    end
+  end
+
   # creates a new turn
   # returns turn result to game interface
   # deal cards to players
