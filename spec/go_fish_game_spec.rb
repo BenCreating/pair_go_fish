@@ -14,22 +14,20 @@ end
 describe 'GoFishGame' do
   let(:players) { [Player.new('Player 1'), Player.new('Player 2'), Player.new('Player 3')] }
   let(:interface) { MockGameInterface.new }
+  let(:game) { game = GoFishGame.new(players: players, interface: interface) }
 
   context '#initialize' do
     it 'stores the players' do
-      game = GoFishGame.new(players: players, interface: interface)
       expect(game.players).to match_array players
     end
 
     it 'creates a deck' do
-      game = GoFishGame.new(players: players, interface: interface)
       expect(game.deck).to_not be_nil
     end
   end
 
   context '#deal_starting_cards' do
     it 'deals the starting number of cards to each player' do
-      game = GoFishGame.new(players: players, interface: interface)
       game.deal_starting_cards
       expect(players[0].hand.cards.count).to eq GoFishGame::STARTING_CARD_COUNT
       expect(players[1].hand.cards.count).to eq GoFishGame::STARTING_CARD_COUNT
