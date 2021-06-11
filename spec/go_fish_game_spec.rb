@@ -2,7 +2,7 @@ require_relative '../lib/go_fish_game'
 require_relative '../lib/player'
 
 class MockGameInterface
-  def pass_question_to_player(question)
+  def pass_question_to_player(player, question)
     if question == 'pick card'
       'A'
     elsif question == 'pick player'
@@ -39,7 +39,7 @@ describe 'GoFishGame' do
   context '#pass_question_to_player' do
     it 'passes a request to the game interface for the player to select a card to ask about' do
       game = GoFishGame.new(players: players, interface: interface)
-      chosen_card = game.pass_question_to_player('pick card')
+      chosen_card = game.pass_question_to_player(players[0], 'pick card')
       expect(chosen_card).to eq 'A'
     end
   end

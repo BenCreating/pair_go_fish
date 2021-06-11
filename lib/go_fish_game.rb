@@ -21,7 +21,7 @@ class GoFishGame
     end
   end
 
-  def pass_question_to_player(question)
-    interface.pass_question_to_player(question)
+  def pass_question_to_player(player, question)
+    interface.pass_question_to_player(player, question)
   end
 end

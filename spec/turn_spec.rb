@@ -2,7 +2,7 @@ require_relative '../lib/turn'
 require_relative '../lib/player'
 
 class MockGoFishGame
-  def pass_question_to_player(question)
+  def pass_question_to_player(player, question)
     if question == 'pick card'
       'A'
     elsif question == 'pick player'
