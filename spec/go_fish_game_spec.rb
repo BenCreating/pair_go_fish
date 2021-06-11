@@ -37,10 +37,16 @@ describe 'GoFishGame' do
   end
 
   context '#pass_question_to_player' do
+    let(:game) { GoFishGame.new(players: players, interface: interface) }
+    
     it 'passes a request to the game interface for the player to select a card to ask about' do
-      game = GoFishGame.new(players: players, interface: interface)
       chosen_card = game.pass_question_to_player(players[0], 'pick card')
       expect(chosen_card).to eq 'A'
+    end
+
+    it 'passes a request to the player interface for the player to select who they want to talk to' do
+      chosen_card = game.pass_question_to_player(players[0], 'pick player')
+      expect(chosen_card).to eq 'player'
     end
   end
 end
