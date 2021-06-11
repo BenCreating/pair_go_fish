@@ -84,6 +84,11 @@ describe 'GoFishGame' do
       full_deck_game.increment_turn_index
       expect(full_deck_game.turn_index).to eq 1
     end
+
+    it 'gives the player another turn when they succesfully ask for cards' do
+      game.increment_turn_index(true)
+      expect(game.turn_index).to eq 0
+    end
   end
 
   context '#pass_question_to_player' do

@@ -27,14 +27,16 @@ class GoFishGame
   def play_next_turn
     turn = Turn.new(players[turn_index], self)
     turn_result = turn.play
-    increment_turn_index
+    increment_turn_index(turn_result.took_cards?)
     turn_result
   end
 
-  def increment_turn_index
-    self.turn_index = (turn_index + 1) % players.count
-    while deck.cards.count == 0 and players[turn_index].hand.cards.count == 0
-      increment_turn_index
+  def increment_turn_index(did_take_cards = false)
+    if did_take_cards == false
+      self.turn_index = (turn_index + 1) % players.count
+      while deck.cards.count == 0 and players[turn_index].hand.cards.count == 0
+        increment_turn_index
+      end
     end
   end
 
