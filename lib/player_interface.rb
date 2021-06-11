@@ -12,8 +12,8 @@ class PlayerInterface
     client.puts message
   end
 
-  def ask_client_a_question_and_wait_for_response(question)
-    send_message_to_client(expand_question(question))
+  def ask_client_a_question_and_wait_for_response(question, all_players)
+    send_message_to_client(expand_question(question, all_players))
     response = nil
     while response == nil do
       response = read_message_from_client
@@ -28,10 +28,12 @@ class PlayerInterface
     rescue IO::WaitReadable
   end
 
-  def expand_question(question)
+  def expand_question(question, other_players)
     expanded_question = nil
     if question == 'pick card'
       expanded_question = expand_pick_card_question
+    elsif question == 'pick player'
+      expanded_question = expand_pick_player_question(other_players)
     end
     expanded_question
   end
@@ -46,6 +48,22 @@ class PlayerInterface
     expanded_question << "\n"
     3.times { |index| expanded_question << ascii_cards_row(player.hand.cards, index) }
     expanded_question
+  end
+
+  def expand_pick_player_question(other_players)
+    expanded_question = "Who do you want to ask?\n"
+    other_players.each.with_index do |player, index|
+      expanded_question << "#{index + 1}. #{player.name} (#{card_count_string(player.hand.cards.count)})\n"
+    end
+    expanded_question.chomp
+  end
+
+  def card_count_string(count)
+    if count == 1
+      "#{count} card"
+    else
+      "#{count} cards"
+    end
   end
 
   def ascii_cards_row(cards, row)
