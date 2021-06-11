@@ -1,14 +1,15 @@
 require 'shuffling_deck'
 
 class GoFishGame
-  attr_reader :players, :deck
+  attr_reader :players, :deck, :interface
 
   CARDS_NEEDED_FOR_A_SET = 4
   STARTING_CARD_COUNT = 5
 
-  def initialize(players, deck = ShufflingDeck.new)
+  def initialize(interface:, players:, deck: ShufflingDeck.new)
     @players = players
     @deck = deck
+    @interface = interface
   end
 
   def deal_starting_cards
