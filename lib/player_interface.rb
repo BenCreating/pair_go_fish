@@ -12,7 +12,7 @@ class PlayerInterface
     client.puts message
   end
 
-  def pass_question_to_player(question)
+  def ask_client_a_question_and_wait_for_response(question)
     send_message_to_client(expand_question(question))
     response = nil
     while response == nil do
