@@ -43,8 +43,4 @@ describe 'GoFishGame' do
       expect(chosen_card).to eq 'A'
     end
   end
-
-  # creates a new turn
-  # returns turn result to game interface
-  # deal cards to players
 end
