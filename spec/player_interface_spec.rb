@@ -44,6 +44,12 @@ describe 'PlayerInterface' do
       user_socket.puts message
       expect(interface.read_message_from_client).to eq message
     end
+
+    it 'rescues the exception when there is no message' do
+      server_socket = server.accept
+      interface = PlayerInterface.new(server_socket)
+      expect(interface.read_message_from_client).to eq nil
+    end
   end
 
   context '#expand_question' do
