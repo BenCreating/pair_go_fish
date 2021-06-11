@@ -8,11 +8,11 @@ class TurnResult
   end
 
   def public_description
-    'Henry asks Margaret for a 5. Margaret has 0. Henry goes fishing.'
+    "#{turn_player.name} asks #{asked_player.name} for a 5. #{asked_player.name} has 0. #{turn_player.name} goes fishing."
   end
 
   def private_description
-    'You ask Margaret for a 5. Margaret has 0. You go fishing and catch a 7.'
+    "You ask #{asked_player.name} for a 5. #{asked_player.name} has 0. You go fishing and catch a 7."
   end
 
   def took_cards?
