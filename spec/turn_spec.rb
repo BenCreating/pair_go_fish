@@ -1,19 +1,26 @@
 require_relative '../lib/turn'
 require_relative '../lib/player'
+require_relative '../lib/playing_card'
 
 class MockGoFishGame
+  attr_reader :players
+  def initialize(players = nil)
+    @players = players
+  end
+
   def pass_question_to_player(player, question)
     if question == 'pick card'
-      'A'
+      player.hand.cards[0]
     elsif question == 'pick player'
-      'player'
+      players[0]
     end
   end
 end
 
 describe 'Turn' do
-  let(:game) { MockGoFishGame.new }
   let(:player) { Player.new }
+  before(:each) { player.take_card(PlayingCard.new('A')) }
+  let(:game) { MockGoFishGame.new([player]) }
 
   context '#initialize' do
     it 'turn is associated with a player' do
@@ -31,7 +38,7 @@ describe 'Turn' do
     it 'finds out what card the player wants to ask for' do
       turn = Turn.new(player, game)
       chosen_card = turn.pick_a_card_to_ask_for
-      expect(chosen_card).to eq 'A'
+      expect(chosen_card).to eq player.hand.cards[0]
     end
   end
 
@@ -39,7 +46,9 @@ describe 'Turn' do
     it 'finds out who the player wants to ask for a card' do
       turn = Turn.new(player, game)
       chosen_player = turn.pick_a_player_to_ask
-      expect(chosen_player).to eq 'player'
+      expect(chosen_player).to eq player
+    end
+  end
     end
   end
 end
