@@ -10,6 +10,13 @@ describe 'PlayerInterface' do
       expect(interface.player).to_not be_nil
       expect(interface.client).to eq 'client'
     end
+
+    it 'set is_ai flag if the client is nil' do
+      interface = PlayerInterface.new()
+      expect(interface.player).to_not be_nil
+      expect(interface.client).to be_nil
+      expect(interface.is_ai).to eq true
+    end
   end
 
   context '#send_message_to_client' do

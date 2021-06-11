@@ -1,11 +1,12 @@
 require_relative 'player'
 require 'pry'
 class PlayerInterface
-  attr_reader :player, :client
+  attr_reader :player, :client, :is_ai
 
-  def initialize(client, name = 'Alfred')
+  def initialize(client = nil, name = 'Alfred')
     @client = client
     @player = Player.new(name)
+    @is_ai = client.nil?
   end
 
   def send_message_to_client(message)
