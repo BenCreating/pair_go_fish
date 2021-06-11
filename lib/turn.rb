@@ -18,6 +18,12 @@ class Turn
     asked_card = pick_a_card_to_ask_for
     asked_player = pick_a_player_to_ask
     taken_cards = asked_player.give_cards_by_rank(asked_card.rank)
+    taken_cards = [fish_for_card] if taken_cards.empty?
     taken_cards.each { |card| turn_player.take_card(card) }
+  end
+
+  private
+  def fish_for_card
+    game.fish_for_card
   end
 end
