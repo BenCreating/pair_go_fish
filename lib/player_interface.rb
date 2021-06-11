@@ -21,6 +21,13 @@ class PlayerInterface
     response
   end
 
+  def read_message_from_client
+    sleep(0.1)
+    message = client.read_nonblock(1000).chomp
+    message
+    rescue IO::WaitReadable
+  end
+
   def expand_question(question)
     expanded_question = nil
     if question == 'pick card'

@@ -28,6 +28,24 @@ describe 'PlayerInterface' do
     end
   end
 
+  context '#read_message_from_client' do
+    let!(:server) { TCPServer.new(3336) }
+    let!(:user_socket) { TCPSocket.new('localhost', 3336) }
+
+    after(:each) do
+      server.close
+      user_socket.close
+    end
+
+    it 'reads a message from the client' do
+      server_socket = server.accept
+      interface = PlayerInterface.new(server_socket)
+      message = 'Hello'
+      user_socket.puts message
+      expect(interface.read_message_from_client).to eq message
+    end
+  end
+
   context '#expand_question' do
     let(:interface) { interface = PlayerInterface.new('client') }
 
