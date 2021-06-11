@@ -17,7 +17,7 @@ class MockGoFishGame
   end
 
   def fish_for_card
-    PlayingCard.new
+    PlayingCard.new('K')
   end
 end
 
@@ -85,6 +85,13 @@ describe 'Turn' do
       turn.play
       expect(player1.hand.cards.count).to eq 2
       expect(player2.hand.cards.count).to eq 3
+    end
+
+    it 'player 2 has no cards and has to draw before taking a turn and having to fish' do
+      player_take_cards(player1, player_1_cards)
+      turn = Turn.new(player2, game)
+      turn.play
+      expect(player2.hand.cards.count).to eq 2
     end
   end
 end
