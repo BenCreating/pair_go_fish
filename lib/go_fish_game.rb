@@ -26,6 +26,9 @@ class GoFishGame
 
   def increment_turn_index
     self.turn_index = (turn_index + 1) % players.count
+    while deck.cards.count == 0 and players[turn_index].hand.cards.count == 0
+      increment_turn_index
+    end
   end
 
   def pass_question_to_player(player, question)

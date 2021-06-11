@@ -1,5 +1,7 @@
 require_relative '../lib/go_fish_game'
 require_relative '../lib/player'
+require_relative '../lib/shuffling_deck'
+require_relative '../lib/playing_card'
 
 class MockGameInterface
   def pass_question_to_player(player, other_players, question)
@@ -51,6 +53,14 @@ describe 'GoFishGame' do
     it 'wraps the turn index back to 0 when it reaches the last player' do
       players.count.times { game.increment_turn_index }
       expect(game.turn_index).to eq 0
+    end
+
+    it 'skips player 2 when they have no cards and the deck is empty' do
+      player_take_cards(players[0], [PlayingCard.new('5'), PlayingCard.new('4')])
+      player_take_cards(players[2], [PlayingCard.new('7')])
+      empty_deck_game = GoFishGame.new(players: players, interface: interface, deck: ShufflingDeck.new([]))
+      empty_deck_game.increment_turn_index
+      expect(empty_deck_game.turn_index).to eq 2
     end
   end
 
