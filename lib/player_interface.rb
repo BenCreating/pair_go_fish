@@ -19,6 +19,7 @@ class PlayerInterface
     else
       response = ask_ai_a_question_and_return_response(question, other_players)
     end
+    interpret_question_response(question, response, other_players)
   end
 
   def ask_client_a_question_and_wait_for_response
@@ -32,6 +33,14 @@ class PlayerInterface
 
   def ask_ai_a_question_and_return_response(question, other_players)
     return 0
+  end
+
+  def interpret_question_response(question, response, other_players)
+    if question == 'pick card'
+      player.hand.cards[response]
+    elsif question == 'pick player'
+      other_players[response]
+    end
   end
 
   def read_message_from_client

@@ -79,4 +79,21 @@ describe 'PlayerInterface' do
       expect(expanded_question).to eq "Who do you want to ask?\n1. Thor (2 cards)\n2. Loki (1 card)\n3. Odin (0 cards)"
     end
   end
+
+  context '#interpret_question_response' do
+    let(:interface) { interface = PlayerInterface.new('client') }
+    let(:cards) { [PlayingCard.new('3'), PlayingCard.new('5')] }
+    let(:players) { [Player.new('Thor'), Player.new('Loki'), Player.new('Odin')] }
+
+    it 'returns the card the player picked' do
+      cards.reverse.each { |card| interface.player.take_card(card) }
+      chosen_card = interface.interpret_question_response('pick card', 0, players)
+      expect(chosen_card).to eq cards[0]
+    end
+
+    it 'returns the player the player picked' do
+      chosen_player = interface.interpret_question_response('pick player', 0, players)
+      expect(chosen_player).to eq players[0]
+    end
+  end
 end
