@@ -52,4 +52,15 @@ describe 'Player' do
       expect(player.hand.cards).to eq non_set_cards
     end
   end
+
+  context '#cards_left' do
+    it 'returns the number of cards left in the hand' do
+      cards = [PlayingCard.new, PlayingCard.new, PlayingCard.new]
+      player = Player.new('Will', PlayerHand.new(cards))
+      expect(player.cards_left).to eq cards.count
+      cards2 = [PlayingCard.new]
+      player2 = Player.new('Jill', PlayerHand.new(cards2))
+      expect(player2.cards_left).to eq cards2.count
+    end
+  end
 end

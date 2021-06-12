@@ -17,4 +17,8 @@ class Player
   def find_and_remove_set
     hand.find_and_remove_set
   end
+
+  def cards_left
+    hand.cards.count
+  end
 end
