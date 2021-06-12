@@ -18,6 +18,10 @@ class CardDeck
     cards.pop
   end
 
+  def cards_left
+    cards.count
+  end
+
   private
   def default_cards
     cards = []

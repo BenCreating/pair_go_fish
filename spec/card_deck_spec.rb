@@ -28,4 +28,13 @@ describe 'CardDeck' do
     dealt_card = deck.deal
     expect(dealt_card.rank).to eq 'A'
   end
+
+  it 'returns the number of cards left in the deck' do
+    cards = [PlayingCard.new, PlayingCard.new, PlayingCard.new]
+    deck = CardDeck.new(cards)
+    expect(deck.cards_left).to eq cards.count
+    cards2 = [PlayingCard.new, PlayingCard.new]
+    deck2 = CardDeck.new(cards2)
+    expect(deck2.cards_left).to eq cards2.count
+  end
 end
