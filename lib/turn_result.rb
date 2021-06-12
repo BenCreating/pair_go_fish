@@ -11,11 +11,13 @@ class TurnResult
   end
 
   def public_description
-    "#{turn_player.name} asks #{asked_player.name} for a #{asked_card.rank}. #{asked_player.name} has 0. #{turn_player.name} goes fishing."
+    description = "#{turn_player.name} asks #{asked_player.name} for a #{asked_card.rank}. #{asked_player.name} has #{taken_cards.count}."
+    description << " #{turn_player.name} goes fishing." if fished_for_card
   end
 
   def private_description
-    "You ask #{asked_player.name} for a #{asked_card.rank}. #{asked_player.name} has 0. You go fishing and catch a #{taken_cards.first.rank}."
+    description = "You ask #{asked_player.name} for a #{asked_card.rank}. #{asked_player.name} has #{taken_cards.count}."
+    description << " You go fishing and catch a #{taken_cards.first.rank}." if fished_for_card
   end
 
   def took_cards?

@@ -33,6 +33,12 @@ describe 'TurnResult' do
       description = turn_result.public_description
       expect(description).to eq "#{player_2.name} asks #{player_1.name} for a #{asked_card.rank}. #{player_1.name} has 0. #{player_2.name} goes fishing."
     end
+
+    it 'gives a description, available to all players, of player 1 asking for a card and recieving it' do
+      turn_result = TurnResult.new(player_1, player_2, taken_cards: taken_cards, fished_for_card: false, asked_card: asked_card, completed_set: completed_set)
+      description = turn_result.public_description
+      expect(description).to eq "#{player_1.name} asks #{player_2.name} for a #{asked_card.rank}. #{player_2.name} gives them 1."
+    end
   end
 
   context '#private_description' do
