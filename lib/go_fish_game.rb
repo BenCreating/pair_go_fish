@@ -34,7 +34,7 @@ class GoFishGame
   def increment_turn_index(did_take_cards = false)
     if did_take_cards == false
       self.turn_index = (turn_index + 1) % players.count
-      while deck.cards.count == 0 and players[turn_index].hand.cards.count == 0
+      while deck.cards_left == 0 and players[turn_index].cards_left == 0
         increment_turn_index
       end
     end

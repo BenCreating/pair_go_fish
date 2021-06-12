@@ -66,7 +66,7 @@ class PlayerInterface
 
   def expand_pick_card_question
     expanded_question = "Which card do you want to ask about?\n"
-    player.hand.cards.count.times { |index| expanded_question << " #{index + 1} " }
+    player.cards_left.times { |index| expanded_question << " #{index + 1} " }
     expanded_question << "\n"
     3.times { |index| expanded_question << ascii_cards_row(player.hand.cards, index) }
     expanded_question
@@ -75,7 +75,7 @@ class PlayerInterface
   def expand_pick_player_question(other_players)
     expanded_question = "Who do you want to ask?\n"
     other_players.each.with_index do |player, index|
-      expanded_question << "#{index + 1}. #{player.name} (#{card_count_string(player.hand.cards.count)})\n"
+      expanded_question << "#{index + 1}. #{player.name} (#{card_count_string(player.cards_left)})\n"
     end
     expanded_question.chomp
   end

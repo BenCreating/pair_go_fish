@@ -19,6 +19,6 @@ class Player
   end
 
   def cards_left
-    hand.cards.count
+    hand.cards_left
   end
 end

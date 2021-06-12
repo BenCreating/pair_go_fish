@@ -37,8 +37,8 @@ describe 'GoFishGame' do
   context '#deal_starting_cards' do
     it 'deals the starting number of cards to each player' do
       game.deal_starting_cards
-      expect(players[0].hand.cards.count).to eq GoFishGame::STARTING_CARD_COUNT
-      expect(players[1].hand.cards.count).to eq GoFishGame::STARTING_CARD_COUNT
+      expect(players[0].cards_left).to eq GoFishGame::STARTING_CARD_COUNT
+      expect(players[1].cards_left).to eq GoFishGame::STARTING_CARD_COUNT
     end
   end
 

@@ -10,7 +10,7 @@ describe 'CardDeck' do
 
   it 'defaults to a standard 52 card deck' do
     deck = CardDeck.new
-    expect(deck.cards.count).to eq 52
+    expect(deck.cards_left).to eq 52
   end
 
   it 'adds a card to the deck' do

@@ -74,8 +74,8 @@ describe 'Turn' do
       player_take_cards(player2, player_2_cards)
       turn = Turn.new(player2, game)
       turn.play
-      expect(player1.hand.cards.count).to eq 1
-      expect(player2.hand.cards.count).to eq 2
+      expect(player1.cards_left).to eq 1
+      expect(player2.cards_left).to eq 2
     end
 
     it 'player 2 asks for a card and has to go fishing' do
@@ -83,15 +83,15 @@ describe 'Turn' do
       player_take_cards(player2, no_match_cards)
       turn = Turn.new(player2, game)
       turn.play
-      expect(player1.hand.cards.count).to eq 2
-      expect(player2.hand.cards.count).to eq 3
+      expect(player1.cards_left).to eq 2
+      expect(player2.cards_left).to eq 3
     end
 
     it 'player 2 has no cards and has to draw before taking a turn and having to fish' do
       player_take_cards(player1, player_1_cards)
       turn = Turn.new(player2, game)
       turn.play
-      expect(player2.hand.cards.count).to eq 2
+      expect(player2.cards_left).to eq 2
     end
   end
 end
