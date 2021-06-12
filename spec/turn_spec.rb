@@ -93,5 +93,14 @@ describe 'Turn' do
       turn.play
       expect(player2.cards_left).to eq 2
     end
+
+    it 'player 2 completes a set' do
+      player_take_cards(player1, player_1_cards)
+      player_take_cards(player2, [PlayingCard.new('A'), PlayingCard.new('A'), PlayingCard.new('A')])
+      turn = Turn.new(player2, game)
+      turn.play
+      expect(player1.cards_left).to eq 1
+      expect(player2.cards_left).to eq 0
+    end
   end
 end

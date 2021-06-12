@@ -19,7 +19,8 @@ class Turn
     taken_cards = ask_for_card
     taken_cards = go_fish_if_necessary(taken_cards)
     pick_up_taken_cards(taken_cards)
-    TurnResult.new(turn_player, asked_player, asked_card: asked_card, taken_cards: taken_cards, fished_for_card: fished_for_card, completed_set: false)
+    completed_set = turn_player.find_and_remove_set
+    TurnResult.new(turn_player, asked_player, asked_card: asked_card, taken_cards: taken_cards, fished_for_card: fished_for_card, completed_set: completed_set)
   end
 
   private
