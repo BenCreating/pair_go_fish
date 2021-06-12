@@ -25,19 +25,19 @@ describe 'TurnResult' do
 
     it 'generates a description, available to all players, of player 1 asking for a card and having to fish' do
       description = turn_result.public_description
-      expect(description).to eq "#{player_1.name} asks #{player_2.name} for a #{asked_card.rank}. #{player_2.name} has 0. #{player_1.name} goes fishing."
+      expect(description).to eq "#{player_1.name} asks #{player_2.name} for a #{asked_card.rank}. #{player_2.name} has none. #{player_1.name} goes fishing."
     end
 
     it 'generates a description, available to all players, of player 2 asking for a card and having to fish' do
       turn_result = TurnResult.new(player_2, player_1, taken_cards: taken_cards, fished_for_card: fished_for_card, asked_card: asked_card, completed_set: completed_set)
       description = turn_result.public_description
-      expect(description).to eq "#{player_2.name} asks #{player_1.name} for a #{asked_card.rank}. #{player_1.name} has 0. #{player_2.name} goes fishing."
+      expect(description).to eq "#{player_2.name} asks #{player_1.name} for a #{asked_card.rank}. #{player_1.name} has none. #{player_2.name} goes fishing."
     end
 
     it 'gives a description, available to all players, of player 1 asking for a card and recieving it' do
       turn_result = TurnResult.new(player_1, player_2, taken_cards: taken_cards, fished_for_card: false, asked_card: asked_card, completed_set: completed_set)
       description = turn_result.public_description
-      expect(description).to eq "#{player_1.name} asks #{player_2.name} for a #{asked_card.rank}. #{player_2.name} gives them 1."
+      expect(description).to eq "#{player_1.name} asks #{player_2.name} for a #{asked_card.rank}. #{player_2.name} gives them #{taken_cards.count}."
     end
   end
 
@@ -48,13 +48,13 @@ describe 'TurnResult' do
 
     it 'generates a description, available to only to player 1, of them asking for a card and having to fish' do
       description = turn_result.private_description
-      expect(description).to eq "You ask #{player_2.name} for a #{asked_card.rank}. #{player_2.name} has 0. You go fishing and catch a #{taken_cards.first.rank}."
+      expect(description).to eq "You ask #{player_2.name} for a #{asked_card.rank}. #{player_2.name} has none. You go fishing and catch a #{taken_cards.first.rank}."
     end
 
     it 'generates a description, available to only to player 2, of them asking for a card and having to fish' do
       turn_result = TurnResult.new(player_2, player_1, taken_cards: taken_cards, fished_for_card: fished_for_card, asked_card: asked_card, completed_set: completed_set)
       description = turn_result.private_description
-      expect(description).to eq "You ask #{player_1.name} for a #{asked_card.rank}. #{player_1.name} has 0. You go fishing and catch a #{taken_cards.first.rank}."
+      expect(description).to eq "You ask #{player_1.name} for a #{asked_card.rank}. #{player_1.name} has none. You go fishing and catch a #{taken_cards.first.rank}."
     end
   end
 
