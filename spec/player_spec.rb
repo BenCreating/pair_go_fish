@@ -42,14 +42,20 @@ describe 'Player' do
   end
 
   context '#find_and_remove_set' do
+    let(:set_cards) { [PlayingCard.new('4'), PlayingCard.new('4'), PlayingCard.new('4'), PlayingCard.new('4')] }
+    let(:non_set_cards) { non_set_cards = [PlayingCard.new('3'), PlayingCard.new('7')] }
+    let(:hand) { PlayerHand.new(set_cards + non_set_cards) }
+    let(:player) { player = Player.new('Eliza', hand) }
+
     it 'removes a card set from the hand and returns the rank of the set' do
-      set_cards = [PlayingCard.new('4'), PlayingCard.new('4'), PlayingCard.new('4'), PlayingCard.new('4')]
-      non_set_cards = [PlayingCard.new('3'), PlayingCard.new('7')]
-      hand = PlayerHand.new(set_cards + non_set_cards)
-      player = Player.new('Eliza', hand)
       set_rank = player.find_and_remove_set
       expect(set_rank).to eq '4'
       expect(player.hand.cards).to eq non_set_cards
+    end
+
+    it 'increases score when a set is removed' do
+      player.find_and_remove_set
+      expect(player.score).to eq 1
     end
   end
 
