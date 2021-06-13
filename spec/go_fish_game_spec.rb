@@ -105,6 +105,26 @@ describe 'GoFishGame' do
     end
   end
 
+  context '#winners' do
+    let(:game) { GoFishGame.new(players: players, interface: interface, deck: ShufflingDeck.new([])) }
+    let(:player_1) { players[0] }
+    let(:player_2) { players[1] }
+
+    it 'returns an array containing the highest scoring player, when the deck is empty and all players are out of cards' do
+      4.times { player_1.take_card(PlayingCard.new('A')) }
+      player_1.find_and_remove_set
+      expect(game.winners).to match_array [player_1]
+    end
+
+    it 'returns an array containing all players tied for the win, when the deck is empty and all players are out of cards' do
+      4.times { player_1.take_card(PlayingCard.new('A')) }
+      player_1.find_and_remove_set
+      4.times { player_2.take_card(PlayingCard.new('A')) }
+      player_2.find_and_remove_set
+      expect(game.winners).to match_array [player_1, player_2]
+    end
+  end
+
   context '#all_players_out_of_cards?' do
     it 'returns false when a player still has cards' do
       players[0].take_card(PlayingCard.new('A'))

@@ -49,6 +49,13 @@ class GoFishGame
     deck.deal
   end
 
+  def winners
+    if deck.cards_left == 0 and all_players_out_of_cards?
+      highest_score = (players.max_by(&:score)).score
+      winners = players.select { |player| player.score == highest_score }
+    end
+  end
+
   def all_players_out_of_cards?
     players.each do |player|
       if player.cards_left > 0
