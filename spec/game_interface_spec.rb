@@ -20,12 +20,19 @@ class MockPlayerInterface
   end
 end
 
+class MockClient
+  def name
+    'Albert'
+  end
+end
+
 describe 'GameInterface' do
   context '#initialize' do
+    let(:client1) { MockClient.new }
+    let(:client2) { MockClient.new }
+    let(:interface) { interface = GameInterface.new([client1, client2]) }
+
     it 'takes an array of clients as input and creates a player interface for each' do
-      client1 = 'client1'
-      client2 = 'client2'
-      interface = GameInterface.new([client1, client2])
       expect(interface.player_interfaces[0].client).to eq client1
       expect(interface.player_interfaces[0].player).to_not be_nil
       expect(interface.player_interfaces[1].client).to eq client2
