@@ -84,6 +84,14 @@ describe 'TurnResult' do
       description = turn_result.private_description
       expect(description).to eq "You ask #{player_2.name} for a #{asked_card.rank}. #{player_2.name} gives you #{taken_cards.count}."
     end
+
+    it 'gives a description, available only to player 1, of them completing a set' do
+      taken_cards = [PlayingCard.new('3'), PlayingCard.new('3'), PlayingCard.new('3')]
+      turn_result = TurnResult.new(player_1, player_2, taken_cards: taken_cards, fished_for_card: false, asked_card: asked_card, completed_set: '3')
+      description = turn_result.private_description
+      completed_set = '3'
+      expect(description).to eq "You ask #{player_2.name} for a #{asked_card.rank}. #{player_2.name} gives you #{taken_cards.count}. You have completed the #{completed_set} set!"
+    end
   end
 
   context '#took_cards?' do

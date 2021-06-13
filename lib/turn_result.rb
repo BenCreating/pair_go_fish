@@ -22,7 +22,7 @@ class TurnResult
   def create_private_description(turn_player:, asked_player:, asked_card:, taken_cards:, fished_for_card:, completed_set:)
     description = "You ask #{asked_player.name} for a #{asked_card.rank}. #{asked_player.name}"
     description << private_given_cards_or_fishing_description(fished_for_card: fished_for_card, taken_cards: taken_cards)
-    description << " #{turn_player.name} has completed the #{completed_set} set!" if completed_set
+    description << " You have completed the #{completed_set} set!" if completed_set
     description
   end
 
