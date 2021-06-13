@@ -48,4 +48,13 @@ class GoFishGame
   def fish_for_card
     deck.deal
   end
+
+  def all_players_out_of_cards?
+    players.each do |player|
+      if player.cards_left > 0
+        return false
+      end
+    end
+    true
+  end
 end

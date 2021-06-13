@@ -16,7 +16,7 @@ end
 describe 'GoFishGame' do
   let(:players) { [Player.new('Player 1'), Player.new('Player 2'), Player.new('Player 3')] }
   let(:interface) { MockGameInterface.new }
-  let(:game) { game = GoFishGame.new(players: players, interface: interface) }
+  let(:game) { GoFishGame.new(players: players, interface: interface) }
 
   def player_take_cards(player, cards)
     cards.each do |card|
@@ -102,6 +102,18 @@ describe 'GoFishGame' do
     it 'passes a request to the player interface for the player to select who they want to talk to' do
       chosen_player = game.pass_question_to_player(players[0], 'pick player')
       expect(chosen_player).to eq players[1]
+    end
+  end
+
+  context '#all_players_out_of_cards?' do
+    it 'returns false when a player still has cards' do
+      players[0].take_card(PlayingCard.new('A'))
+      expect(game.all_players_out_of_cards?).to eq false
+    end
+
+    it 'returns true when no player has cards' do
+      game = GoFishGame.new(players: players, interface: interface, deck: ShufflingDeck.new([]))
+      expect(game.all_players_out_of_cards?).to eq true
     end
   end
 end
