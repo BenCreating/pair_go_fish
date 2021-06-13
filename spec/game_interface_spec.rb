@@ -38,6 +38,10 @@ describe 'GameInterface' do
       expect(interface.player_interfaces[1].client).to eq client2
       expect(interface.player_interfaces[1].player).to_not be_nil
     end
+
+    it 'creates a game' do
+      expect(interface.game).to_not be_nil
+    end
   end
 
   context 'describe_result_to_clients' do

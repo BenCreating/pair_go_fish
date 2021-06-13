@@ -1,14 +1,16 @@
 require_relative 'player'
 require_relative 'player_interface'
+require_relative 'go_fish_game'
 
 require 'pry'
 
 class GameInterface
-  attr_reader :player_interfaces
+  attr_reader :player_interfaces, :game
 
   def initialize(clients, interface_overrides = nil)
-    @player_interfaces = new_player_interfaces_or_overrides(interface_overrides)
     @player_interfaces = new_player_interfaces_or_overrides(clients, interface_overrides)
+    game_players = player_interfaces.map { |interface| interface.player }
+    @game = GoFishGame.new(interface: self, players: game_players, deck: ShufflingDeck.new)
   end
 
   def describe_result_to_clients(result)
