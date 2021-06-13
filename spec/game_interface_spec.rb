@@ -20,16 +20,10 @@ class MockPlayerInterface
   end
 end
 
-class MockClient
-  def name
-    'Albert'
-  end
-end
-
 describe 'GameInterface' do
   context '#initialize' do
-    let(:client1) { MockClient.new }
-    let(:client2) { MockClient.new }
+    let(:client1) { 'client2' }
+    let(:client2) { 'client1' }
     let(:interface) { interface = GameInterface.new([client1, client2]) }
 
     it 'takes an array of clients as input and creates a player interface for each' do
