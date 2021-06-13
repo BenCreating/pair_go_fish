@@ -28,6 +28,10 @@ class GameInterface
     target_player_interface.ask_a_question_and_wait_for_response(question, all_players)
   end
 
+  def start_game
+    play_game_loop
+  end
+
   private
 
   def new_player_interfaces_or_overrides(clients, interface_overrides)
@@ -38,5 +42,11 @@ class GameInterface
       clients.each.with_index { |client, index| interface_array << interface_overrides[index] }
     end
     interface_array
+  end
+
+  def play_game_loop
+    while !game.winners
+      game.play_next_turn
+    end
   end
 end
