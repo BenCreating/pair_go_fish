@@ -49,9 +49,9 @@ describe 'TurnResult' do
 
     it 'gives a description, available to all players, of player 1 completing a set' do
       taken_cards = [PlayingCard.new('3'), PlayingCard.new('3'), PlayingCard.new('3')]
-      turn_result = TurnResult.new(player_1, player_2, taken_cards: taken_cards, fished_for_card: false, asked_card: asked_card, completed_set: 'K')
+      turn_result = TurnResult.new(player_1, player_2, taken_cards: taken_cards, fished_for_card: false, asked_card: asked_card, completed_set: '3')
       description = turn_result.public_description
-      completed_set = 'K'
+      completed_set = '3'
       expect(description).to eq "#{player_1.name} asks #{player_2.name} for a #{asked_card.rank}. #{player_2.name} gives them #{taken_cards.count}. #{player_1.name} has completed the #{completed_set} set!"
     end
   end
