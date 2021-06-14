@@ -50,7 +50,9 @@ class GoFishServer
   def create_game_if_possible
     if clients.count >= MAXIMUM_NUMBER_OF_PLAYERS
       game_clients = clients.slice!(0, 4)
-      game_interfaces << GameInterface.new(game_clients)
+      game_interface = GameInterface.new(game_clients)
+      game_interfaces << game_interface
+      return game_interface
     end
   end
 end
