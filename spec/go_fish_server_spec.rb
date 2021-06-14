@@ -2,6 +2,14 @@ require_relative '../lib/go_fish_server.rb'
 
 describe 'GoFishServer' do
   let(:server) { GoFishServer.new }
+  let(:clients) { [] }
+
+  def create_and_accept_client
+    client = TCPSocket.new('localhost', server.port_number)
+    clients << client
+    server.accept_connection
+    client
+  end
 
   before(:each) do
     server.start
@@ -9,6 +17,7 @@ describe 'GoFishServer' do
 
   after(:each) do
     server.stop
+    clients.each { |client| client.close }
   end
 
   it 'returns the port number' do
@@ -17,11 +26,8 @@ describe 'GoFishServer' do
 
   context '#accept_connection' do
     it 'accepts a client' do
-      client = TCPSocket.new('localhost', server.port_number)
-      server.accept_connection
+      client = create_and_accept_client
       expect(server.clients.count).to eq 1
-      client.close
-      # TODO ask how to confirm that the client is actually the one I expect without hanging
     end
 
     it 'rescue no client error' do
@@ -31,30 +37,26 @@ describe 'GoFishServer' do
 
   context '#recieve_message' do
     it 'reads a message from a socket' do
-      client = TCPSocket.new('localhost', server.port_number)
-      server.accept_connection
+      client = create_and_accept_client
       message = 'Hello'
       client.puts message
       expect(server.recieve_message(server.clients[0])).to eq message
-      client.close
     end
 
     it 'rescues the exception if there is no message' do
-      client = TCPSocket.new('localhost', server.port_number)
-      server.accept_connection
+      client = create_and_accept_client
       expect(server.recieve_message(server.clients[0])).to eq 'No message'
-      client.close
     end
   end
 
   context '#send_message' do
     it 'sends a message to a client' do
-      client = TCPSocket.new('localhost', server.port_number)
-      server.accept_connection
+      client = create_and_accept_client
       message = 'Hello'
       server.send_message(server.clients[0], message)
       expect(client.gets.chomp).to eq message
-      client.close
+    end
+  end
     end
   end
 end
