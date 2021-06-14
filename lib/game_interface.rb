@@ -48,5 +48,6 @@ class GameInterface
     while !game.winners
       game.play_next_turn
     end
+    player_interfaces.each { |interface| interface.send_message_to_client('Game over') }
   end
 end
