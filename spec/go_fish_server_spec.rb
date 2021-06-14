@@ -57,6 +57,13 @@ describe 'GoFishServer' do
       expect(client.gets.chomp).to eq message
     end
   end
+
+  context '#create_game_if_possible' do
+    it 'creates a game when the maximum player count is met' do
+      GoFishServer::MAXIMUM_NUMBER_OF_PLAYERS.times { create_and_accept_client }
+      server.create_game_if_possible
+      expect(server.game_interfaces.count).to eq 1
+      expect(server.clients.count).to eq 0
     end
   end
 end
