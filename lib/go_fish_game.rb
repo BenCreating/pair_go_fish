@@ -1,5 +1,5 @@
-require 'shuffling_deck'
-require 'turn'
+require_relative 'shuffling_deck'
+require_relative 'turn'
 
 class GoFishGame
   attr_reader :players, :deck, :interface
