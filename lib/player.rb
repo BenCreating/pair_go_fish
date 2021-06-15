@@ -1,3 +1,5 @@
+require_relative 'player_hand'
+
 class Player
   attr_reader :name, :hand, :score
 
